@@ -1,5 +1,17 @@
+import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
+import { SessionProvider } from "next-auth/react";
 import "./globals.css";
+import '../style/style.css';
+import Header from "@/components/Layout/Header";
+import Footer from "@/components/Layout/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
+import Home from "./page";
+import { Inter } from "next/font/google";
+import { CartProvider } from "@/context/CartContext";
+const inter = Inter({ subsets: ["latin"] });
+
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,11 +30,19 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className}>
+        <ThemeProvider
+          attribute="class"
+          enableSystem={true}
+          defaultTheme="light"
+        ><CartProvider>
+          <Header />
+          {children}
+          <Footer />
+          <ScrollToTop />
+          </CartProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
