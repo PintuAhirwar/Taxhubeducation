@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import SocialSignIn from "../SocialSignIn";
 import Logo from "@/components/Layout/Header/Logo";
 import Loader from "@/components/Common/Loader";
+import { API_BASE } from "@/lib/api";
 
 export default function AuthPage() {
   const router = useRouter();
@@ -32,7 +33,7 @@ export default function AuthPage() {
     try {
       if (isRegister && !otpSent) {
         // Step 1: Register and send OTP
-        const res = await fetch("http://127.0.0.1:8000/api/auth/register/", {
+        const res = await fetch(`${API_BASE}/api/auth/register/`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -52,7 +53,7 @@ export default function AuthPage() {
         }
       } else if (isRegister && otpSent) {
         // Step 2: Verify OTP
-        const res = await fetch("http://127.0.0.1:8000/api/auth/verify-otp/", {
+        const res = await fetch(`${API_BASE}/api/auth/verify-otp/`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: formData.email, otp: formData.otp }),
@@ -68,7 +69,7 @@ export default function AuthPage() {
         }
       } else {
         // Step 3: Login
-        const res = await fetch("http://127.0.0.1:8000/api/auth/login/", {
+        const res = await fetch(`${API_BASE}/api/auth/login/`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

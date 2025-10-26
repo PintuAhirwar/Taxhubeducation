@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API_BASE } from "@/lib/api";
 
 export default function OrdersPage() {
   const [orders, setOrders] = useState([]);
@@ -8,7 +9,7 @@ export default function OrdersPage() {
   useEffect(() => {
     const token = localStorage.getItem("access");
     axios
-      .get("http://127.0.0.1:8000/api/orders/", {
+      .get(`${API_BASE}/api/orders/`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setOrders(res.data))

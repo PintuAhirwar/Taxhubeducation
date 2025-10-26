@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Breadcrumb from "@/components/Breadcrumb";
+import { API_BASE } from "@/lib/api";
 
 export default function ProfilePage() {
   const [formData, setFormData] = useState({
@@ -36,7 +37,7 @@ export default function ProfilePage() {
     if (!token) return;
 
     axios
-      .get("http://127.0.0.1:8000/api/auth/profile/", {
+      .get(`${API_BASE}/api/auth/profile/`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
@@ -82,7 +83,7 @@ export default function ProfilePage() {
   }
 
   try {
-    await axios.put("http://127.0.0.1:8000/api/auth/profile/", formDataToSend, {
+    await axios.put(`${API_BASE}/api/auth/profile/`, formDataToSend, {
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${token}`,

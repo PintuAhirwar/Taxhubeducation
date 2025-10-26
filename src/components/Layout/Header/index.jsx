@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { use } from "react";
 import { useCart } from "@/context/CartContext";
-
+import { API_BASE } from "@/lib/api";
 
 export default function Header() {
   const pathUrl = usePathname();
@@ -85,7 +85,7 @@ export default function Header() {
   useEffect(() => {
     if (!token) return;
     axios
-      .get("http://127.0.0.1:8000/api/auth/profile/", {
+      .get(`${API_BASE}/api/auth/profile/`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setUser(res.data))
@@ -96,7 +96,7 @@ export default function Header() {
   const handleLogout = async () => {
     try {
       if (!refresh) return;
-      await axios.post("http://127.0.0.1:8000/api/auth/logout/", {
+      await axios.post(`${API_BASE}/api/auth/logout/`, {
         refresh_token: refresh,
       });
     } catch (e) {

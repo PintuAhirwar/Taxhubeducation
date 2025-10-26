@@ -7,6 +7,7 @@ import { getImagePrefix } from "@/utils/util";
 import { toast } from "react-toastify";
 import Breadcrumb from "@/components/Breadcrumb";
 import axios from "axios";
+import { API_BASE } from "@/lib/api";
 
 export default function CartPage() {
   const { cart, loading, removeFromCart, clearCart } = useCart();
@@ -53,7 +54,7 @@ export default function CartPage() {
   // -------------------- APPLY VOUCHER --------------------
   const handleVoucherApply = async () => {
     try {
-      const res = await axios.post("http://127.0.0.1:8000/vouchers/validate/", {
+      const res = await axios.post(`${API_BASE}/vouchers/validate/`, {
         code: formData.voucher,
         course_id: cart[0]?.course?.id || cart[0]?.id, // assuming 1 course per order
       });
@@ -78,7 +79,7 @@ export default function CartPage() {
 
     try {
       await axios.post(
-        "http://127.0.0.1:8000/orders/",
+        `${API_BASE}/api/orders/`,
         {
           name: formData.name,
           email: formData.email,

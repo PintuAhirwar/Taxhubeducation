@@ -21,7 +21,7 @@ export const CartProvider = ({ children }) => {
       if (access) {
         setLoading(true);
         try {
-          const serverItems = await apiGet("/cart/");
+          const serverItems = await apiGet("/api/cart/");
           setCart(serverItems);
           setSynced(true);
         } catch (err) {
@@ -46,7 +46,7 @@ export const CartProvider = ({ children }) => {
     if (access) {
       try {
         const payload = { course_id: course.id };
-        const res = await apiPost("/cart/", payload);
+        const res = await apiPost("/api/cart/", payload);
         // server returns CartItem with course nested
         // ensure we don't duplicate in local state
         setCart((prev) => {
@@ -75,7 +75,7 @@ export const CartProvider = ({ children }) => {
     const access = typeof window !== "undefined" && localStorage.getItem("access");
     if (access) {
       try {
-        await apiDelete(`/cart/remove/${courseId}/`);
+        await apiDelete(`/api/cart/remove/${courseId}/`);
         setCart((prev) => prev.filter((it) => !(it.course?.id === courseId || it.course_id === Number(courseId))));
         return { ok: true };
       } catch (err) {
@@ -92,7 +92,7 @@ export const CartProvider = ({ children }) => {
     const access = typeof window !== "undefined" && localStorage.getItem("access");
     if (access) {
       try {
-        await apiPost("/cart/clear/", {});
+        await apiPost("/api/cart/clear/", {});
         setCart([]);
         return { ok: true };
       } catch (err) {
