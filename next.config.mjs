@@ -12,7 +12,7 @@ const nextConfig = {
     },
     {
       protocol: "https",
-      hostname: "classroom.onrender.com",
+      hostname: "classroom-backend-dvcd.onrender.com",
       port: "",
       pathname: "/media/**",
     },

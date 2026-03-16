@@ -1,7 +1,7 @@
 export const API_BASE = 
   process.env.NEXT_PUBLIC_ENV === "local"
     ? "http://127.0.0.1:8000/api"
-    : "https://classroom.onrender.com/api";
+    : "https://classroom-backend-dvcd.onrender.com/api";
 
 export function getAuthHeaders() {
   if (typeof window === "undefined") return { "Content-Type": "application/json" };
