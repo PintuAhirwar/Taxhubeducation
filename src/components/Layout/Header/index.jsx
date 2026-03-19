@@ -121,9 +121,10 @@ export default function Header() {
             {!user ? (
               <button
                 onClick={() => setIsSignInOpen(true)}
-                className="hidden lg:flex items-center gap-1.5 bg-primary text-white
-                           px-5 py-2.5 rounded-full text-sm font-semibold
-                           hover:bg-primary/90 transition-colors"
+                className="hidden lg:flex items-center gap-2 bg-primary text-white
+               hover:bg-primary/15 hover:text-primary
+               px-5 py-2.5 rounded-full text-sm font-semibold
+               transition-colors active:scale-[0.98]"
               >
                 Sign In
               </button>

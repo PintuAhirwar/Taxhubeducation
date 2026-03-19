@@ -304,9 +304,7 @@ const Courses = () => {
                     <div className="flex justify-center mt-10">
                         <button
                             onClick={() => router.push(activeCategory !== "all" ? `/courses?category=${activeCategory}` : "/courses")}
-                            className="flex items-center gap-2 bg-primary text-white px-8 py-3
-                         rounded-full font-semibold text-sm hover:bg-primary/90
-                         transition-all duration-200 shadow-sm shadow-primary/20"
+                            className="flex items-center gap-2 bg-primary text-white hover:bg-primary/15 hover:text-primary px-8 py-3 rounded-full text-lg font-medium flex items-center justify-center gap-2 transition-colors active:scale-[0.98]"
                         >
                             <Icon icon="mdi:open-in-new" className="text-base" />
                             Browse All Products

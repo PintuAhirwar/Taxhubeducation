@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Icon } from "@iconify/react";
 import { getImagePrefix } from "@/utils/util";
 import { motion, AnimatePresence } from "framer-motion";
+import FloatingCards from "./FloatingCards";
 
 const Hero = () => {
   const [slider, setSlider] = useState([]);
@@ -69,7 +70,7 @@ const Hero = () => {
   const activeW    = isMobile ? 750  : 2400;
   const activeH    = isMobile ? 900  : 750;
 
-  // ── Nav Arrows — dark style, desktop only ───────────────
+  // ── Nav Arrows ───────────────────────────────────────────
   const NavArrows = () =>
     slider.length > 1 && !isMobile ? (
       <>
@@ -77,8 +78,7 @@ const Hero = () => {
           onClick={goPrev}
           className="absolute left-4 top-1/2 -translate-y-1/2 z-20
             w-11 h-11 rounded-full flex items-center justify-center
-            transition-all duration-200
-            bg-black/50 hover:bg-black/75"
+            transition-all duration-200 bg-black/50 hover:bg-black/75"
           aria-label="Previous"
         >
           <Icon icon="solar:arrow-left-linear" className="text-white text-2xl" />
@@ -87,8 +87,7 @@ const Hero = () => {
           onClick={goNext}
           className="absolute right-4 top-1/2 -translate-y-1/2 z-20
             w-11 h-11 rounded-full flex items-center justify-center
-            transition-all duration-200
-            bg-black/50 hover:bg-black/75"
+            transition-all duration-200 bg-black/50 hover:bg-black/75"
           aria-label="Next"
         >
           <Icon icon="solar:arrow-right-linear" className="text-white text-2xl" />
@@ -96,7 +95,7 @@ const Hero = () => {
       </>
     ) : null;
 
-  // ── Dots — dark style ────────────────────────────────────
+  // ── Dots ─────────────────────────────────────────────────
   const Dots = () =>
     slider.length > 1 ? (
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-50 flex gap-2">
@@ -114,7 +113,7 @@ const Hero = () => {
       </div>
     ) : null;
 
-  // ── WITH SEARCH ──────────────────────────────────────────
+  // ── 1st SLIDE: background image + left text + floating cards ──
   if (item.show_search) {
     return (
       <section
@@ -149,7 +148,10 @@ const Hero = () => {
 
         <div className="absolute inset-0">
 
-          {/* Desktop content — left center */}
+          {/* Floating cards — image ke upar exact positions pe */}
+          <FloatingCards cards={item.floating_cards || []} />
+
+          {/* Desktop: left center text */}
           {!isMobile && (
             <div className="h-full container mx-auto lg:max-w-screen-xl px-8 flex items-center">
               <AnimatePresence mode="wait">
@@ -178,7 +180,7 @@ const Hero = () => {
             </div>
           )}
 
-          {/* Mobile content — top center */}
+          {/* Mobile: top center text */}
           {isMobile && (
             <div className="w-full px-5 pt-25">
               <AnimatePresence mode="wait">
@@ -215,7 +217,7 @@ const Hero = () => {
     );
   }
 
-  // ── WITHOUT SEARCH: pure image ──────────────────────────
+  // ── BAAKI SLIDES: pure image ─────────────────────────────
   return (
     <section
       id="home-section"

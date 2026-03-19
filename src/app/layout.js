@@ -11,6 +11,7 @@ import { CartProvider } from "@/context/CartContext";
 import { AuthProvider } from "@/context/AuthContext";
 import { ToastContainer } from "react-toastify";        // ← ADD
 import "react-toastify/dist/ReactToastify.css";         // ← ADD
+import TawkChat from "@/components/TawkChat";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,7 +31,9 @@ export default function RootLayout({ children }) {
           <AuthProvider>
             <CartProvider>
               <Header />
+              <TawkChat />
               {children}
+              
               <Footer />
               <ScrollToTop />
               <ToastContainer
